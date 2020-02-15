@@ -1,0 +1,73 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+import java.util.Stack;
+
+public class GenevaConfection {
+    static StringTokenizer st;
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    public static void main(String[] args) throws IOException {
+        Stack <Integer> mountain = new Stack<>();
+        Stack <Integer> branch = new Stack<>();
+        Stack <Integer> lake = new Stack<>();
+        int numberTests = Integer.parseInt(br.readLine());
+        for (int i = 0; i < numberTests; i++) {
+            //clearing all existing stacks
+            mountain.clear();
+            branch.clear();
+            lake.clear();
+
+            int numberCars = Integer.parseInt(br.readLine());
+            for (int j = 0; j < numberCars; j++ ) {
+                mountain.push(Integer.parseInt(br.readLine()));
+            }
+            int nextCar = 1;
+            while (true){
+                if (mountain.isEmpty() && branch.isEmpty()) {
+                    System.out.println("Y");
+                    break;
+                }
+                else if (!mountain.isEmpty() && mountain.peek() == nextCar) {
+                    lake.push(mountain.peek());
+                    mountain.pop();
+                    nextCar++;
+                }
+                else if (!branch.isEmpty() && branch.peek() == nextCar) {
+                    lake.push(branch.peek());
+                    branch.pop();
+                    nextCar++;
+                }
+                else if (!mountain.isEmpty()) {
+                    branch.push(mountain.peek());
+                    mountain.pop();
+                }
+                else if (branch.isEmpty() != mountain.isEmpty())
+                    if (mountain.isEmpty() && branch.peek() != nextCar) {
+                        System.out.println("N");
+                        break;
+                    }
+                    else if (branch.isEmpty() && mountain.peek() != nextCar) {
+                        System.out.println("N");
+                        break;
+                    }
+                }
+            }
+
+
+
+        }
+    static String next() throws IOException {
+        while (st == null || !st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine());
+        return st.nextToken();
+    }
+
+    static int readInt() throws IOException {
+        return Integer.parseInt(next());
+    }
+
+}
