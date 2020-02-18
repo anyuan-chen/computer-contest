@@ -1,0 +1,30 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.*;
+
+public class GenevaConfection {
+    static StringTokenizer st;
+    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) throws IOException {
+        int rangeStart = readInt();
+        int rangeEnd = readInt();
+        int numberCool =0;
+        for (int i = rangeStart; i < rangeEnd+1; i++){
+            if (Math.sqrt(i) == Math.floor(Math.sqrt(i)) && Math.cbrt(i) == Math.floor(Math.cbrt(i))){
+                numberCool++;
+            }
+        }
+        System.out.println(numberCool);
+    }
+    static String next() throws IOException {
+        while (st == null || !st.hasMoreTokens())
+            st = new StringTokenizer(br.readLine());
+        return st.nextToken();
+    }
+
+    static int readInt() throws IOException {
+        return Integer.parseInt(next());
+    }
+
+}
